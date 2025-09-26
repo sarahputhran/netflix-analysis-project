@@ -1,0 +1,17 @@
+# Virtual environment
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional - ignore large/raw datasets if you don't want to push them
+# data/raw/
