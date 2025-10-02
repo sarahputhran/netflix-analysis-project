@@ -15,3 +15,6 @@ Thumbs.db
 
 # Optional - ignore large/raw datasets if you don't want to push them
 # data/raw/
+.gitignore.bak
+25.2
+data/.gitkeep
