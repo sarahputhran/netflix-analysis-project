@@ -129,7 +129,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("View Dashboards"):
         try:
-            st.switch_page(r"pages\02_Dashboards.py")
+            st.switch_page("pages\02_Dashboards.py")
         except Exception:
             # fallback: try the page name (works on supported Streamlit versions)
             try:
@@ -139,7 +139,7 @@ with col1:
 with col2:
     if st.button("Try Recommender System"):
         try:
-            st.switch_page(r"pages\03_Recommender.py")
+            st.switch_page("pages\03_Recommender.py")
         except Exception:
             try:
                 st.switch_page("03_Recommender")

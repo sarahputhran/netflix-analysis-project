@@ -57,29 +57,35 @@ st.markdown("""
 
 st.markdown("---")
 
-# ───────────────────── Power BI download ─────────────────────
-st.header("📈 Power BI Dashboard (Local Download)")
-st.markdown("""
-The Power BI dashboard uses:
+# ───────────────────── Power BI Dashboard (Download Link) ─────────────────────
+st.header("📈 Power BI Dashboard (Download)")
 
-- `data/cleaned/netflix_titles_clean.csv`  
+# Direct download from GitHub (raw file)
+pbix_url = "https://github.com/sarahputhran/netflix-analysis-project/raw/main/docs/powerbi/Netflix_Titles_PowerBI.pbix.pbix"
+
+st.markdown("""
+The Power BI dashboard was created using:
+- `data/cleaned/netflix_titles_clean.csv`
 - `data/cleaned/agg_by_genre.csv`
+
+You can download it directly below 👇
 """)
 
-# Resolve absolute path safely (works from any working directory)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-pbix_path = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\docs\powerbi\Netflix_Titles_PowerBI.pbix.pbix"
-
-if os.path.exists(pbix_path):
-    with open(pbix_path, "rb") as f:
+# Streamlit download button from URL
+try:
+    import requests
+    response = requests.get(pbix_url)
+    if response.status_code == 200:
         st.download_button(
             label="📥 Download Power BI Dashboard (.pbix)",
-            data=f.read(),
+            data=response.content,
             file_name="Netflix_Titles_PowerBI.pbix",
             mime="application/octet-stream",
         )
-else:
-    st.warning("⚠️ Power BI file not found in `docs/powerbi/`")
+    else:
+        st.warning("⚠️ Unable to fetch Power BI file from GitHub.")
+except Exception as e:
+    st.error(f"❌ Error fetching Power BI file: {e}")
 
 # ───────────────────── Load data from absolute paths ─────────────────────
 path_clean = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\data\cleaned\netflix_titles_clean.csv"
@@ -244,7 +250,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Back to Home"):
         try:
-            st.switch_page(r"pages\01_Home.py")
+            st.switch_page("pages\01_Home.py")
         except Exception:
             try:
                 st.switch_page("01_Home")
@@ -253,7 +259,7 @@ with col1:
 with col2:
     if st.button("Go to Recommender"):
         try:
-            st.switch_page(r"pages\03_Recommender.py")
+            st.switch_page("pages\03_Recommender.py")
         except Exception:
             try:
                 st.switch_page("03_Recommender")
