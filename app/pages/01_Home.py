@@ -128,10 +128,10 @@ st.markdown("""
 col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("View Dashboards"):
-        st.switch_page("../pages/02_Dashboards.py")
+        st.switch_page("02_Dashboards.py")
 with col2:
     if st.button("Try Recommender System"):
-        st.switch_page("../pages/03_Recommender.py")
+        st.switch_page("03_Recommender.py")
 
 # ───────────────────── Minimal Footer ─────────────────────
 st.markdown(
