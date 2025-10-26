@@ -112,7 +112,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Back to Home"):
         try:
-            st.switch_page("pages\01_Home.py")
+            st.switch_page("01_Home.py")
         except Exception:
             try:
                 st.switch_page("01_Home")
@@ -121,7 +121,7 @@ with col1:
 with col2:
     if st.button("View Dashboards"):
         try:
-            st.switch_page("pages\02_Dashboards.py")
+            st.switch_page("02_Dashboards.py")
         except Exception:
             try:
                 st.switch_page("02_Dashboards")

@@ -88,10 +88,10 @@ except Exception as e:
     st.error(f"❌ Error fetching Power BI file: {e}")
 
 # ───────────────────── Load data from absolute paths ─────────────────────
-path_clean = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\data\cleaned\netflix_titles_clean.csv"
-path_year_type = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\data\cleaned\agg_by_year_type.csv"
-path_genre = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\data\cleaned\agg_by_genre.csv"
-path_country = r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\data\cleaned\agg_by_country.csv"
+path_clean = os.path.join(BASE_DIR, "netflix_titles_clean.csv")
+path_year_type = os.path.join(BASE_DIR, "agg_by_year_type.csv")
+path_genre = os.path.join(BASE_DIR, "agg_by_genre.csv")
+path_country = os.path.join(BASE_DIR, "agg_by_country.csv")
 
 df_clean = pd.read_csv(path_clean)
 agg_by_year_type = pd.read_csv(path_year_type)
@@ -250,7 +250,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Back to Home"):
         try:
-            st.switch_page("pages\01_Home.py")
+            st.switch_page("01_Home.py")
         except Exception:
             try:
                 st.switch_page("01_Home")
@@ -259,7 +259,7 @@ with col1:
 with col2:
     if st.button("Go to Recommender"):
         try:
-            st.switch_page("pages\03_Recommender.py")
+            st.switch_page("03_Recommender.py")
         except Exception:
             try:
                 st.switch_page("03_Recommender")
