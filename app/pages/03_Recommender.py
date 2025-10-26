@@ -106,12 +106,3 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
-st.markdown("---")
-col1, col2 = st.columns([1, 1])
-with col1:
-    if st.button("Back to Home"):
-        st.switch_page("01_Home.py")
-with col2:
-    if st.button("View Dashboards"):
-        st.switch_page("02_Dashboards.py")

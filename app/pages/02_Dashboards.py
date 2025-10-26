@@ -245,11 +245,3 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
-st.markdown("---")
-with col1:
-    if st.button("Back to Home"):
-        st.switch_page("01_Home.py")
-with col2:
-    if st.button("Go to Recommender"):
-        st.switch_page("03_Recommender.py")
