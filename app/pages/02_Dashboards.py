@@ -88,6 +88,7 @@ except Exception as e:
     st.error(f"❌ Error fetching Power BI file: {e}")
 
 # ───────────────────── Load data from absolute paths ─────────────────────
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/cleaned"))
 path_clean = os.path.join(BASE_DIR, "netflix_titles_clean.csv")
 path_year_type = os.path.join(BASE_DIR, "agg_by_year_type.csv")
 path_genre = os.path.join(BASE_DIR, "agg_by_genre.csv")
@@ -249,19 +250,7 @@ st.markdown("---")
 col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("Back to Home"):
-        try:
-            st.switch_page("01_Home.py")
-        except Exception:
-            try:
-                st.switch_page("01_Home")
-            except Exception:
-                pass
+        st.switch_page("01_Home.py")
 with col2:
     if st.button("Go to Recommender"):
-        try:
-            st.switch_page("03_Recommender.py")
-        except Exception:
-            try:
-                st.switch_page("03_Recommender")
-            except Exception:
-                pass
+        st.switch_page("03_Recommender.py")

@@ -109,21 +109,10 @@ st.markdown("""
 
 st.markdown("---")
 col1, col2 = st.columns([1, 1])
+col1, col2 = st.columns(2)
 with col1:
     if st.button("Back to Home"):
-        try:
-            st.switch_page("01_Home.py")
-        except Exception:
-            try:
-                st.switch_page("01_Home")
-            except Exception:
-                pass
+        st.switch_page("01_Home.py")
 with col2:
     if st.button("View Dashboards"):
-        try:
-            st.switch_page("02_Dashboards.py")
-        except Exception:
-            try:
-                st.switch_page("02_Dashboards")
-            except Exception:
-                pass
+        st.switch_page("02_Dashboards.py")

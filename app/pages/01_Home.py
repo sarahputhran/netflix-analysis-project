@@ -128,23 +128,10 @@ st.markdown("""
 col1, col2 = st.columns([1, 1])
 with col1:
     if st.button("View Dashboards"):
-        try:
-            st.switch_page("02_Dashboards.py")
-        except Exception:
-            # fallback: try the page name (works on supported Streamlit versions)
-            try:
-                st.switch_page("02_Dashboards")
-            except Exception:
-                pass
+        st.switch_page("02_Dashboards.py")
 with col2:
     if st.button("Try Recommender System"):
-        try:
-            st.switch_page("03_Recommender.py")
-        except Exception:
-            try:
-                st.switch_page("03_Recommender")
-            except Exception:
-                pass
+        st.switch_page("03_Recommender.py")
 
 # ───────────────────── Minimal Footer ─────────────────────
 st.markdown(
