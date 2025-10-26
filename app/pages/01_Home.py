@@ -102,28 +102,6 @@ To understand Netflix’s content patterns and build a recommender system that s
 """
 )
 
-st.markdown("---")
-
-# Button style (red buttons, white text) - keeps theme consistent across pages
-st.markdown("""
-<style>
-.stButton > button {
-    background-color: #E50914 !important;
-    color: #ffffff !important;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 0.6em 1.2em;
-    border: none;
-    transition: transform .12s ease-in-out, box-shadow .12s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.stButton > button:hover {
-    background-color: #B00610 !important;
-    transform: translateY(-2px);
-}
-</style>
-""", unsafe_allow_html=True)
-
 # ───────────────────── Minimal Footer ─────────────────────
 st.markdown(
     f"<div class='footer'>Built with Python • Streamlit • Plotly</div>",

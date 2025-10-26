@@ -20,15 +20,6 @@ import pandas as pd
 # Apply theme
 apply_theme()
 
-# Hide scrollbars
-st.markdown("""
-    <style>
-    ::-webkit-scrollbar {display:none;}
-    html, body {overflow:hidden;}
-    iframe {border:none!important;overflow:hidden!important;}
-    </style>
-""", unsafe_allow_html=True)
-
 # Title
 st.title("📊 Dashboards – Tableau, Power BI & Plotly Visualizations")
 
@@ -225,23 +216,3 @@ st.markdown("""
 - These genres make up nearly **half of all available titles**, aligning with global audience preferences.  
 - The mix of international and emotional storytelling genres highlights Netflix’s **broad audience strategy**.
 """)
-
-# Button style (red buttons, white text) - re-declare to ensure page-level consistency
-st.markdown("""
-<style>
-.stButton > button {
-    background-color: #E50914 !important;
-    color: #ffffff !important;
-    font-weight: 600;
-    border-radius: 10px;
-    padding: 0.6em 1.2em;
-    border: none;
-    transition: transform .12s ease-in-out, box-shadow .12s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.stButton > button:hover {
-    background-color: #B00610 !important;
-    transform: translateY(-2px);
-}
-</style>
-""", unsafe_allow_html=True)
