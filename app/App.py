@@ -21,7 +21,7 @@ apply_theme()
 # ───────────────────────────────
 st.markdown("""
     <div style='text-align:center; margin-top:20%;'>
-        <h2 style='color:#E50914;'>Loading Netflix Analysis Dashboard...</h2>
+        <h2 style='color:#E50914;'>Loading Netflix Analysis App...</h2>
         <p style='color:#aaa;'>Please wait while we set things up.</p>
     </div>
 """, unsafe_allow_html=True)

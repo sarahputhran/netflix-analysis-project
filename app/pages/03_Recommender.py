@@ -1,31 +1,61 @@
 import os
 import sys
+import streamlit as st
+import joblib
+import pandas as pd
+import requests
+from sklearn.metrics.pairwise import cosine_similarity
 
-# Fix paths first
+# ───────────────────── Fix paths ─────────────────────
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.abspath(os.path.join(current_dir, "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# Now import your own modules
+# Import app theme utilities
 from utils import apply_theme
 from theme import THEME
 
-import streamlit as st
-import joblib
-import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
+# Apply theme
+apply_theme()
 
 st.title("🎥 Netflix Recommendation System")
 st.write("Find similar Movies and TV Shows using content-based filtering.")
 
-# Load saved models & data
+# ───────────────────── Hugging Face Model URLs ─────────────────────
+MODEL_URLS = {
+    "tfidf": "https://huggingface.co/sarahputhran/Netflix_Project_Models/resolve/main/tfidf_vectorizer.pkl",
+    "cosine": "https://huggingface.co/sarahputhran/Netflix_Project_Models/resolve/main/cosine_similarity.pkl",
+    "data_ref": "https://huggingface.co/sarahputhran/Netflix_Project_Models/resolve/main/data_reference.pkl",
+}
+
+# ───────────────────── Helper: Download model if missing ─────────────────────
+def download_if_missing(url, local_path):
+    """Downloads a file from Hugging Face if it doesn't exist locally."""
+    if not os.path.exists(local_path):
+        st.info(f"📥 Downloading {os.path.basename(local_path)}...")
+        response = requests.get(url)
+        response.raise_for_status()
+        os.makedirs(os.path.dirname(local_path), exist_ok=True)
+        with open(local_path, "wb") as f:
+            f.write(response.content)
+        st.success(f"✅ Downloaded {os.path.basename(local_path)}")
+
+# ───────────────────── Download models if needed ─────────────────────
+model_dir = os.path.join(project_root, "app", "models")
+os.makedirs(model_dir, exist_ok=True)
+
+download_if_missing(MODEL_URLS["tfidf"], os.path.join(model_dir, "tfidf_vectorizer.pkl"))
+download_if_missing(MODEL_URLS["cosine"], os.path.join(model_dir, "cosine_similarity.pkl"))
+download_if_missing(MODEL_URLS["data_ref"], os.path.join(model_dir, "data_reference.pkl"))
+
+# ───────────────────── Load models ─────────────────────
 try:
-    tfidf = joblib.load(r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\app\models\tfidf_vectorizer.pkl")
-    cosine_sim = joblib.load(r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\app\models\cosine_similarity.pkl")
-    df_ref = joblib.load(r"C:\Users\Admibn\OneDrive\Desktop\Netflix Project\netflix-analysis-project\app\models\data_reference.pkl")
-except FileNotFoundError:
-    st.error("❌ Model files not found. Please ensure tfidf_vectorizer.pkl, cosine_similarity.pkl, and data_reference.pkl are in `app/models/`.")
+    tfidf = joblib.load(os.path.join(model_dir, "tfidf_vectorizer.pkl"))
+    cosine_sim = joblib.load(os.path.join(model_dir, "cosine_similarity.pkl"))
+    df_ref = joblib.load(os.path.join(model_dir, "data_reference.pkl"))
+except Exception as e:
+    st.error(f"❌ Error loading model files: {e}")
     st.stop()
 
 df_ref["title_lower"] = df_ref["title"].str.lower()
